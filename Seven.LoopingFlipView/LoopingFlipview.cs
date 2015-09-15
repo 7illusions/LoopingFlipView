@@ -20,6 +20,10 @@ namespace Seven.Controls
         private Button _previousButton;        
 
         public static readonly DependencyProperty IntervalProperty = DependencyProperty.Register("Interval", typeof(int), typeof(LoopingFlipview), new PropertyMetadata(0, IntervalSet));
+        /// <summary>
+        /// The interval, in seconds, when the control should switch to next item
+        /// (0 = Off)
+        /// </summary>
         public int Interval
         {
             get { return (int)GetValue(IntervalProperty); }
@@ -27,6 +31,10 @@ namespace Seven.Controls
         }
 
         public static readonly DependencyProperty ContextIndicatorVisiblityProperty = DependencyProperty.Register("ContextIndicatorVisiblity", typeof(Visibility), typeof(LoopingFlipview), new PropertyMetadata(Visibility.Visible));
+
+        /// <summary>
+        /// Set to Visible to show the ContextIndicator
+        /// </summary>
         public Visibility ContextIndicatorVisiblity
         {
             get { return (Visibility)GetValue(ContextIndicatorVisiblityProperty); }
