@@ -1,0 +1,94 @@
+﻿<Page x:Class="SampleApp.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:SampleApp"
+      xmlns:controls="using:Seven.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="WideTemplate">
+            <Grid Width="600"
+                  Height="400"
+                  Margin="0"
+                  BorderThickness="0"
+                  Padding="0"
+                  Background="Black">
+                <Image Source="{Binding ImageUrl}"
+                       Stretch="UniformToFill" />
+                <TextBlock Text="{Binding Title}"
+                           FontSize="22"
+                           FontWeight="ExtraLight"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="NormalTemplate">
+            <Grid Width="400"
+                  Height="250"
+                  Margin="0"
+                  BorderThickness="0"
+                  Padding="0"
+                  Background="Black">
+                <Image Source="{Binding ImageUrl}"
+                       Stretch="UniformToFill" />
+                <TextBlock Text="{Binding Title}"
+                           FontSize="12"
+                           FontWeight="ExtraLight"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Wide">
+                    <VisualState.Setters>
+                        <Setter Target="LoopingFlipView.ItemTemplate"
+                                Value="{StaticResource WideTemplate}" />
+                        <Setter Target="LoopingFlipView.Height"
+                                Value="420" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Compact">
+                    <VisualState.Setters>
+                        <Setter Target="LoopingFlipView.ItemTemplate"
+                                Value="{StaticResource NormalTemplate}" />
+                        <Setter Target="LoopingFlipView.Height"
+                                Value="270" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <controls:LoopingFlipview x:Name="LoopingFlipView"
+                                  ItemsSource="{Binding Items}"
+                                  ItemTemplate="{StaticResource WideTemplate}"
+                                  Height="300"
+                                  VerticalAlignment="Top" />
+        <RelativePanel HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom">
+            <ToggleSwitch HorizontalAlignment="Left"
+                          VerticalAlignment="Bottom"
+                          Header="Enable Timer"
+                          Margin="20,0,0,20"
+                          x:Name="EnableTimer"                          
+                          Toggled="EnableTimer_Toggled" />            
+            <ToggleSwitch x:Name="EnableContext"
+                          RelativePanel.Below="EnableTimer"
+                          Header="Enable ContextIndicator"
+                          Margin="20,0,0,60"
+                          IsOn="True"                          
+                          Toggled="EnableContext_Toggled" />
+        </RelativePanel>
+    </Grid>
+</Page>
