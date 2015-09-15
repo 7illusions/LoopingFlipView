@@ -118,6 +118,7 @@
                                  ItemsSource="{TemplateBinding ItemsSource}"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Top"
+                                 IsHitTestVisible="False"
                                  Visibility="{TemplateBinding ContextIndicatorVisiblity}"
                                  Grid.Row="1">
                             <ListBox.ItemsPanel>
