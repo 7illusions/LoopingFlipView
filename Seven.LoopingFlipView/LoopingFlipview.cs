@@ -17,7 +17,7 @@ namespace Seven.Controls
         private readonly DispatcherTimer _updateTimer;
         private bool _templateApplied;
         private Button _nextButton;
-        private Button _previousButton;        
+        private Button _previousButton;
 
         public static readonly DependencyProperty IntervalProperty = DependencyProperty.Register("Interval", typeof(int), typeof(LoopingFlipview), new PropertyMetadata(0, IntervalSet));
         /// <summary>
@@ -63,7 +63,7 @@ namespace Seven.Controls
             {
                 InitializePanel();
             };
-            ManipulationMode = ManipulationModes.TranslateX | ManipulationModes.TranslateInertia;
+            ManipulationMode = ManipulationModes.TranslateX;
         }
 
         protected override void OnApplyTemplate()
@@ -82,13 +82,12 @@ namespace Seven.Controls
 
         protected override void OnManipulationCompleted(ManipulationCompletedRoutedEventArgs e)
         {
-            if (e.IsInertial)
-            {
-                if (e.Cumulative.Translation.X > 100)
-                    SetPreviousItem();
-                if (e.Cumulative.Translation.X < -100)
-                    SetNextItem();
-            }
+
+            if (e.Cumulative.Translation.X > 30)
+                SetPreviousItem();
+            if (e.Cumulative.Translation.X < -30)
+                SetNextItem();
+
             base.OnManipulationCompleted(e);
         }
 
@@ -100,7 +99,7 @@ namespace Seven.Controls
 
         protected override void OnPointerEntered(PointerRoutedEventArgs e)
         {
-            if (_templateApplied)
+            if (_templateApplied && IsMouse(e))
             {
                 VisualStateManager.GoToState(this, "Show", true);
             }
@@ -109,7 +108,7 @@ namespace Seven.Controls
 
         protected override void OnPointerExited(PointerRoutedEventArgs e)
         {
-            if (_templateApplied)
+            if (_templateApplied && IsMouse(e))
             {
                 VisualStateManager.GoToState(this, "Hide", true);
             }
@@ -189,6 +188,11 @@ namespace Seven.Controls
             {
                 loopingItemsPanel.ScrollIntoView(index);
             }
+        }
+
+        private bool IsMouse(PointerRoutedEventArgs args)
+        {
+            return args.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse;
         }
     }
 }
