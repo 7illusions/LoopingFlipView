@@ -41,6 +41,23 @@
                            VerticalAlignment="Bottom" />
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="NarrowTemplate">
+            <Grid Width="300"
+                  Height="175"
+                  Margin="0"
+                  BorderThickness="0"
+                  Padding="0"
+                  Background="Black">
+                <Image Source="{Binding ImageUrl}"
+                       Stretch="UniformToFill" />
+                <TextBlock Text="{Binding Title}"
+                           FontSize="12"
+                           FontWeight="ExtraLight"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom" />
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -66,6 +83,17 @@
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="500"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Phone">
+                    <VisualState.Setters>
+                        <Setter Target="LoopingFlipView.ItemTemplate"
+                                Value="{StaticResource NarrowTemplate}" />
+                        <Setter Target="LoopingFlipView.Height"
+                                Value="190" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"></AdaptiveTrigger>
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>

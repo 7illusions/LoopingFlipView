@@ -18,7 +18,7 @@ namespace SampleApp
             Items = GetSampleData();
             DataContext = this;
 
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private ObservableCollection<SampleEntity> GetSampleData()
