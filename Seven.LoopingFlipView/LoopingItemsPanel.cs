@@ -62,6 +62,7 @@ namespace Seven.Controls.Panels
 
         protected override Size MeasureOverride(Size availableSize)
         {
+            var maxItemHeight = 0d;
             var size = base.MeasureOverride(availableSize);
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, size.Width, size.Height) };
 
@@ -69,12 +70,17 @@ namespace Seven.Controls.Panels
             {
                 container.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
 
+                if (container.DesiredSize.Height > maxItemHeight)
+                {
+                    maxItemHeight = container.DesiredSize.Height;
+                }
+
                 if (_itemWidth != container.DesiredSize.Width)
                 {
                     _itemWidth = container.DesiredSize.Width;
                 }
             }
-
+            size.Height = maxItemHeight;
             return (size);
         }
 

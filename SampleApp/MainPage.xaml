@@ -67,8 +67,6 @@
                     <VisualState.Setters>
                         <Setter Target="LoopingFlipView.ItemTemplate"
                                 Value="{StaticResource WideTemplate}" />
-                        <Setter Target="LoopingFlipView.Height"
-                                Value="420" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="900"></AdaptiveTrigger>
@@ -77,9 +75,7 @@
                 <VisualState x:Name="Compact">
                     <VisualState.Setters>
                         <Setter Target="LoopingFlipView.ItemTemplate"
-                                Value="{StaticResource NormalTemplate}" />
-                        <Setter Target="LoopingFlipView.Height"
-                                Value="270" />
+                                Value="{StaticResource NormalTemplate}" />     
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="500"></AdaptiveTrigger>
@@ -89,8 +85,6 @@
                     <VisualState.Setters>
                         <Setter Target="LoopingFlipView.ItemTemplate"
                                 Value="{StaticResource NarrowTemplate}" />
-                        <Setter Target="LoopingFlipView.Height"
-                                Value="190" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0"></AdaptiveTrigger>
@@ -100,9 +94,9 @@
         </VisualStateManager.VisualStateGroups>
         <controls:LoopingFlipview x:Name="LoopingFlipView"
                                   ItemsSource="{Binding Items}"
-                                  ItemTemplate="{StaticResource WideTemplate}"
-                                  Height="300"
-                                  VerticalAlignment="Top" />
+                                  ItemTemplate="{StaticResource WideTemplate}"                                  
+                                  VerticalAlignment="Top"
+                                  />
         <RelativePanel HorizontalAlignment="Left"
                        VerticalAlignment="Bottom">
             <ToggleSwitch HorizontalAlignment="Left"
