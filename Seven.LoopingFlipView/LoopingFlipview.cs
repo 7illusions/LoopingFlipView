@@ -55,7 +55,10 @@ namespace Seven.Controls
             _updateTimer = new DispatcherTimer();
             _updateTimer.Tick += (s, e) =>
             {
-                SetNextItem();
+                if (Items?.Count > 1)
+                {
+                    SetNextItem();
+                }
             };
 
             DefaultStyleKey = typeof(LoopingFlipview);
